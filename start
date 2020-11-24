@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+. set_env_vars.sh
+. utils.sh
+#init_bash_lib
+
+. ./0_export_env_vars.sh
+
+# TODO: Add stop back in???
+#./stop
+
+./1_create_conjur_cli.sh
+./2_check_conjur.sh
+./3_check_authn_k8s_enabled.sh
+# Source the next script so that we get an exported CLUSTERROLE env.
+. ./4_check_cluster_role.sh
+./5_check_role_binding.sh
